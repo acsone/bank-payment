@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="validate_invoice_cancel" model="ir.ui.view">
+            <field name="name">validate.invoice.cancel.form</field>
+            <field name="model">validate.invoice.cancel</field>
+            <field name="arch" type="xml">
+                <form string="Validate Invoice Cancel" version="7.0">
+                    <group>
+                       <p>WARNING ! You try to cancel an invoice related to a payment order.</p>
+                    </group>
+                    <group groups="account.group_account_manager">
+                       <p>This process can be dangerous. You assume the possible consequences of this action.</p>
+                    </group>
+                    <footer groups="account.group_account_manager">
+                        <button string="I accept and force invoice's cancellation" name="validate_cancel"
+                            type="object" class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link"
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>
