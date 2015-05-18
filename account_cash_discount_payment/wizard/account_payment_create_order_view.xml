@@ -7,9 +7,14 @@
             <field name="model">payment.order.create</field>
             <field name="inherit_id" ref="account_banking_payment_export.view_create_payment_order"/>
             <field name="arch" type="xml">
-                <field name="duedate" position="after">
+                <xpath expr="//field[@name='duedate']" position="before">
                     <field name="cash_discount_date"/>
-                </field>
+                    <field name="cash_discount_date_start" attrs="{'invisible': [('cash_discount_date', '=', False)], 'required': [('cash_discount_date', '=', True)]}"/>
+                    <field name="cash_discount_date_end" attrs="{'invisible': [('cash_discount_date', '=', False)], 'required': [('cash_discount_date', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='duedate']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('cash_discount_date', '=', True)]}</attribute>
+                </xpath>
             </field>
         </record>
     </data>
