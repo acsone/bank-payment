@@ -21,4 +21,29 @@ msgstr ""
 msgid "Entry Lines"
 msgstr "Lignes d'écriture"
 
+#. module: account_cash_discount_payment
+#: field:payment.order.create,cash_discount_date:0
+msgid "Cash Discount Due Date"
+msgstr "Date d'échéance de l'escompte"
+
+#. module: account_cash_discount_payment
+#: field:payment.order.create,cash_discount_date_end:0
+msgid "Cash discount End Date"
+msgstr "Dernière date d'escompte"
+
+#. module: account_cash_discount_payment
+#: field:payment.order.create,cash_discount_date_start:0
+msgid "Cash discount Start Date"
+msgstr "Première date d'escompte"
+
+#. module: account_cash_discount_payment
+#: field:payment.line,discount_amount:0
+msgid "Discount Amount"
+msgstr "Escompte"
+
+#. module: account_cash_discount_payment
+#: model:ir.model,name:account_cash_discount_payment.model_payment_line
+msgid "Payment Line"
+msgstr "Ligne de paiement"
+
 

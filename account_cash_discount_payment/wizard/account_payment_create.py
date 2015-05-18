@@ -28,6 +28,8 @@ class PaymentOrderCreate(models.TransientModel):
 
     cash_discount_date = fields.Boolean(string="Cash Discount Due Date",
                                         default=False)
+    cash_discount_date_start = fields.Date(string="Cash discount Start Date")
+    cash_discount_date_end = fields.Date(string="Cash discount End Date")
 
     def _prepare_payment_line(self, payment, line):
         res = super(PaymentOrderCreate, self)._prepare_payment_line(payment,
@@ -56,6 +58,8 @@ class PaymentOrderCreate(models.TransientModel):
         if context.get('cash_discount_date', False) and \
                 context.get('due_date', False):
             due_date = context.get('due_date', False)
+            date_start = context.get('date_start', False)
+            date_end = context.get('date_end', False)
             pos = 0
             while pos < len(domain):
                 if pos < len(domain)-2 and domain[pos] == '|' and \
@@ -67,7 +71,8 @@ class PaymentOrderCreate(models.TransientModel):
                     domain.pop(pos)
                     break
                 pos += 1
-            domain += [('invoice.discount_due_date', '<=', due_date)]
+            domain += [('invoice.discount_due_date', '>=', date_start),
+                       ('invoice.discount_due_date', '<=', date_end)]
         return True
 
     @api.multi
@@ -75,7 +80,9 @@ class PaymentOrderCreate(models.TransientModel):
         ctx = self.env.context.copy()
         if self.cash_discount_date:
             ctx.update({'cash_discount_date': True,
-                        'due_date': self.duedate})
+                        'due_date': self.duedate,
+                        'date_start': self.cash_discount_date_start,
+                        'date_end': self.cash_discount_date_end})
         else:
             ctx.update({'cash_discount_date': False})
         return super(PaymentOrderCreate, self.with_context(ctx))\
