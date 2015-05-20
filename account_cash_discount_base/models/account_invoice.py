@@ -34,6 +34,7 @@ class account_invoice(models.Model):
     discount_amount = fields.Float(string='Amount Discount deducted',
                                    readonly=True,
                                    states={'draft': [('readonly', False)]})
+    discount = fields.Float(string='Amount Discount', readonly=True)
     discount_delay = fields.Integer(string='Discount Delay (days)',
                                     readonly=True,
                                     states={'draft': [('readonly', False)]})
@@ -62,11 +63,15 @@ class account_invoice(models.Model):
         if (self.type in ['in_invoice', 'out_invoice'] and
                 self.discount_percent != 0.0):
             self.discount_amount = self._compute_discount_amount()
+        if self.discount_amount != 0.0:
+            self.discount = self.amount_total - self.discount_amount
+        else:
+            self.discount = 0.0
 
     @api.one
     def compute_discount_due_date(self):
-        if self.discount_delay != 0 and (self.type != 'in_invoice' or
-                                         self.discount_delay != 0):
+        if self.discount != 0 and self.discount_delay != 0 and \
+                (self.type != 'in_invoice' or self.discount_delay != 0):
             self.discount_due_date = self._compute_discount_due_date()
 
     @api.multi
@@ -80,14 +85,9 @@ class account_invoice(models.Model):
         super(account_invoice, self).action_move_create()
         for inv in self:
             inv.compute_discount_amount()
+            inv.compute_discount_due_date()
             if not inv.discount_due_date and \
                     inv.discount_amount and inv.discount_amount != 0.0:
                 raise exceptions.Warning(_('Warning !\n You have to define '
                                            'a discount due date'))
-        return True
-
-    @api.multi
-    def action_date_assign(self):
-        super(account_invoice, self).action_date_assign()
-        self.compute_discount_due_date()
         return True

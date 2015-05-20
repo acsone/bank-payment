@@ -22,7 +22,7 @@
 
 {
     "name": "Account Cash Discount Base",
-    "version": "1.0",
+    "version": "1.1",
     "author": "ACSONE SA/NV",
     "maintainer": "ACSONE SA/NV",
     "website": "http://www.acsone.eu",
