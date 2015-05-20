@@ -2,8 +2,8 @@
 #
 ##############################################################################
 #
-#    Authors: Adrien Peiffer
-#    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
+#     Authors: Adrien Peiffer
+#    Copyright (c) 2015 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +20,15 @@
 #
 ##############################################################################
 
-from . import account_payment
-from . import account_move_line
+from openerp import models, fields
+
+
+class account_move_line(models.Model):
+    _inherit = 'account.move.line'
+
+    discount_due_date = fields.Date(string='Discount Due Date',
+                                    readonly=True,
+                                    related='invoice.discount_due_date')
+    discount = fields.Float(string='Amount Discount',
+                            readonly=True,
+                            related='invoice.discount')
