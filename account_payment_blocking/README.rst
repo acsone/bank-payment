@@ -16,8 +16,10 @@ so it is easier to block an invoice.
 Installation
 ============
 
-This module depends on account_banking_payment_export that is part 
-of the OCA/bank-payment suite.
+This module depends on 
+- account_banking_payment_export
+
+This module is part of the OCA/bank-payment suite.
 
 Configuration
 =============
