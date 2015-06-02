@@ -28,9 +28,8 @@ No configuration required.
 Usage
 =====
 
-To use this module, you need to:
+See 'readme' files of the OCA/bank-payment suite.
 
- * go to ...
 
 For further information, please visit:
 

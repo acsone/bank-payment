@@ -17,23 +17,21 @@ and only users in that group see these buttons and menus.
 Installation
 ============
 
-To install this module, you need to:
+This module depends on :
+- account_voucher
 
- * do this ...
+This modules are parts of the OCA/bank-payment suite.
 
 Configuration
 =============
 
-To configure this module, you need to:
-
- * go to ...
+There is nothing to configure.
 
 Usage
 =====
 
-To use this module, you need to:
+See above the description of the module.
 
- * go to ...
 
 For further information, please visit:
 

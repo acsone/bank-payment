@@ -17,7 +17,7 @@ Installation
 ============
 
 This module depends on :
-- account_payment
+* account_payment
 
 This modules are parts of the OCA/bank-payment suite.
 
@@ -29,9 +29,7 @@ Need more informations ....
 Usage
 =====
 
-To use this module, you need to:
-
- * go to ...
+To use this module, see menu "Accounting > payment > SEPA direct debit mandates" 
 
 For further information, please visit:
 

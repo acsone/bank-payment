@@ -17,23 +17,22 @@ Installation
 ============
 
 This module depends on :
-- account_banking_payment_export
+* account_banking_payment_export
 
 This modules are parts of the OCA/bank-payment suite.
 
 Configuration
 =============
 
-To configure this module, you need to:
-
- * go to ...
+There is nothing to configure.
 
 Usage
 =====
 
-To use this module, you need to:
-
- * go to ...
+You are able to add a payment mode directly on a partner.
+This payment mode is automatically associated to the invoice related to the partner. This default value could be change in a draft invoice.
+When you create an payment order, only invoices related to chosen payment mode are displayed.
+Invoices without any payment mode are displayed to.
 
 For further information, please visit:
 

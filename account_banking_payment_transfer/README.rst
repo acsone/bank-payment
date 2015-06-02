@@ -16,7 +16,7 @@ Installation
 ============
 
 This module depends on :
-- account_banking_payment_export
+* account_banking_payment_export
 
 This modules are parts of the OCA/bank-payment suite.
 
@@ -25,14 +25,14 @@ Configuration
 
 To configure this module, you need to:
 
- * go to ...
+ * create a transfert account who allow reconciliation : option "Allow Reconciliation" activated.
+ * configure transfert account on payment mode. Go to the menu Accounting > Configuration > Miscellaneous > Payment Mode and complete the section "Transfer move settings".
 
 Usage
 =====
 
-To use this module, you need to:
+This module allows to reconcile transfer account and invoice by selecting on a payment order a payment mode with the option "transfer account" activated.
 
- * go to ...
 
 For further information, please visit:
 

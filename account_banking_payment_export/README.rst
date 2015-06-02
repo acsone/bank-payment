@@ -26,8 +26,8 @@ Installation
 ============
 
 This module depends on :
-- account_payment
-- base_iban
+* account_payment
+* base_iban
 
 This modules are parts of the OCA/bank-payment suite.
 
@@ -39,9 +39,7 @@ No configuration required.
 Usage
 =====
 
-To use this module, you need to:
-
- * go to ...
+This module provides a menu to configure payment order types : Accounting > Configuration > Miscellaneous > Payment Export Types 
 
 For further information, please visit:
 

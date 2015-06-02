@@ -18,23 +18,20 @@ Installation
 ============
 
 This module depends on :
-- account_banking_payment_export
+* account_banking_payment_export
 
 This modules are parts of the OCA/bank-payment suite.
 
 Configuration
 =============
 
-To configure this module, you need to:
-
- * go to ...
+Please refer to module "Account Banking SEPA Direct Debit"
 
 Usage
 =====
 
-To use this module, you need to:
+Please refer to module "Account Banking SEPA Direct Debit"
 
- * go to ...
 
 For further information, please visit:
 

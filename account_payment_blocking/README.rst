@@ -17,7 +17,7 @@ Installation
 ============
 
 This module depends on 
-- account_banking_payment_export
+* account_banking_payment_export
 
 This module is part of the OCA/bank-payment suite.
 
@@ -33,6 +33,7 @@ To use this module, set the "Blocked" flag on supplier invoices
 or on payable/receivable journal items.
 
 These invoices will not be proposed for inclusion in payment orders.
+
 
 For further information, please visit:
 

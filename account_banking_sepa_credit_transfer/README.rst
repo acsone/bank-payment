@@ -21,23 +21,20 @@ Installation
 ============
 
 This module depends on :
-- account_banking_pain_base
+* account_banking_pain_base
 
 This modules are parts of the OCA/bank-payment suite.
 
 Configuration
 =============
 
-To configure this module, you need to:
-
- * go to ...
+* Choose an SEPA export type on a payment mode.
 
 Usage
 =====
 
-To use this module, you need to:
+Allow to export an payment order in SEPA xml file when the payment mode refers an SEPA export.
 
- * go to ...
 
 For further information, please visit:
 

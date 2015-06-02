@@ -23,9 +23,9 @@ Installation
 ============
 
 This module depends on :
-- account_direct_debit
-- account_banking_pain_base',
-- account_banking_mandate
+* account_direct_debit
+* account_banking_pain_base',
+* account_banking_mandate
 
 This modules are parts of the OCA/bank-payment suite.
 
@@ -34,14 +34,12 @@ Configuration
 
 To configure this module, you need to:
 
- * go to ...
+ * Create a payment mode and select an export type related to debit order ( eg. "SEPA direct debit ...")
 
 Usage
 =====
 
-To use this module, you need to:
-
- * go to ...
+To use this module, you must select this payment mode on a direct debit order (Menu :Accounting > Payment > Direct Debit orders)
 
 For further information, please visit:
 

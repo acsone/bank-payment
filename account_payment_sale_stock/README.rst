@@ -4,29 +4,33 @@
 Account Payment Sale Stock
 ==========================
 
+This module should be used when the invoice is based on the delivery order.
+
 This module copies *Payment Mode* from sale order to invoice when it is
-generated from the picking.
+generated from the delivery order.
 
 Installation
 ============
 
-To install this module, you need to:
+This module depends on :
+- sale_stock
+- account_payment_sale
 
- * do this ...
+This modules are parts of the OCA/bank-payment suite.
 
 Configuration
 =============
 
-To configure this module, you need to:
-
- * go to ...
+There is nothing to configure.
 
 Usage
 =====
 
-To use this module, you need to:
-
- * go to ...
+You are able to add a payment mode directly on a partner.
+This payment mode is automatically associated to the sale order, then on related invoice. 
+This default value could be change in a draft sale order or draft invoice.
+When you create an direct debit order, only invoices related to chosen payment mode are displayed.
+Invoices without any payment mode are displayed to.
 
 For further information, please visit:
 
