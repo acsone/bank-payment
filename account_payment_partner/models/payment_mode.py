@@ -1,13 +1,13 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2009 EduSense BV (<http://www.edusense.nl>).
-#    All Rights Reserved
+#    Copyright (C) 2015 Akretion (http://www.akretion.com)
+#    @author Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -19,6 +19,14 @@
 #
 ##############################################################################
 
-from . import models
+from openerp import models, fields
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+
+class PaymentMode(models.Model):
+    _inherit = "payment.mode"
+
+    default_payment_mode = fields.Selection([
+        ('same', 'Same'),
+        ('same_or_null', 'Same or empty'),
+        ('any', 'Any'),
+        ], string='Payment Mode on Invoice', default='same')

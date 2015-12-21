@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright 2011 - 2014 Therp BV (<http://therp.nl>).
+#    SEPA Direct Debit module for Odoo
+#    Copyright (C) 2015 Akretion (http://www.akretion.com)
+#    @author: Alexis de Lattre <alexis.delattre@akretion.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,15 +19,23 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm
+
+from openerp import models, api
 
 
-class ResBank(orm.Model):
-    _inherit = 'res.bank'
+class BankPaymentLine(models.Model):
+    _inherit = 'bank.payment.line'
 
-    def online_bank_info(self, cr, uid, bic, context=None):
+    @api.multi
+    def move_line_transfer_account_hashcode(self):
         """
-        API hook for legacy online lookup of BICs,
-        to be removed in OpenERP 8.0.
+        From my experience, even when you ask several direct debits
+        at the same date with enough delay, you will have several credits
+        on your bank statement: one for each mandate types.
+        So we split the transfer move lines by mandate type, so easier
+        reconciliation of the bank statement.
         """
-        return False, False
+        hashcode = super(BankPaymentLine, self).\
+            move_line_transfer_account_hashcode()
+        hashcode += '-' + unicode(self.mandate_id.recurrent_sequence_type)
+        return hashcode
