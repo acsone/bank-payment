@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="invoice_supplier_form_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form (account_payment_include_draft_move)</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account_default_draft_move.invoice_form_supplier_group_invoice"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='invoice_cancel' and @states='open']" position="attributes">
+                    <attribute name="type">object</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

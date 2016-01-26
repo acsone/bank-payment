@@ -2,7 +2,7 @@
 #
 ##############################################################################
 #
-#     Authors: Adrien Peiffer
+#    Authors: Adrien Peiffer
 #    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+#
 
-from . import payment_order_create
-from . import validate_invoice_cancel
+from . import test_cancel_invoice

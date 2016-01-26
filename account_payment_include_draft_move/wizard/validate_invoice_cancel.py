@@ -3,7 +3,7 @@
 ##############################################################################
 #
 #     Authors: Adrien Peiffer
-#    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
+#    Copyright (c) 2015 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +20,19 @@
 #
 ##############################################################################
 
-from . import payment_order_create
-from . import validate_invoice_cancel
+from openerp import models, api, workflow
+
+
+class validate_invoice_cancel(models.TransientModel):
+    _name = 'validate.invoice.cancel'
+
+    @api.multi
+    def validate_cancel(self):
+        context = self.env.context
+        invoice_obj = self.env['account.invoice']
+        invoice_id = context.get('invoice_id')
+        invoice = invoice_obj.browse([invoice_id])[0]
+        payment_lines = invoice_obj.get_payment_line_linked(invoice)
+        payment_lines.write({'move_line_id': False})
+        workflow.trg_validate(self._uid, 'account.invoice', invoice.id,
+                              'invoice_cancel', self._cr)
