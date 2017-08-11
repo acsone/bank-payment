@@ -36,6 +36,8 @@
         'views/ir_attachment.xml',
         'views/account_invoice_view.xml',
         'data/payment_seq.xml',
+        'data/account_payment_order_printing.xml',
+        'report/print_account_payment_order.xml',
     ],
     'demo': ['demo/payment_demo.xml'],
     'installable': True,
