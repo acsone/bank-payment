@@ -2,8 +2,8 @@
 #
 ##############################################################################
 #
-#    Authors: Adrien Peiffer
-#    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
+#     Authors: Adrien Peiffer
+#    Copyright (c) 2015 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,25 +20,15 @@
 #
 ##############################################################################
 
-{
-    "name": "Account Cash Discount Base",
-    "version": "1.1",
-    "author": "ACSONE SA/NV",
-    "maintainer": "ACSONE SA/NV",
-    "website": "http://www.acsone.eu",
-    "images": [],
-    "category": "Accounting",
-    "depends": [
-        "account",
-    ],
-    "data": [
-        'views/account_invoice_view.xml',
-        'reports/report_invoice.xml',
-    ],
-    "demo": [],
-    "test": [],
-    "licence": "AGPL-3",
-    "installable": True,
-    "auto_install": False,
-    "application": True,
-}
+from openerp import models, fields
+
+
+class account_move_line(models.Model):
+    _inherit = 'account.move.line'
+
+    discount_due_date = fields.Date(string='Discount Due Date',
+                                    readonly=True,
+                                    related='invoice.discount_due_date')
+    discount = fields.Float(string='Amount Discount',
+                            readonly=True,
+                            related='invoice.discount')

@@ -62,10 +62,16 @@ class TestAccountCashDiscountBase(common.TransactionCase):
         invoice = create_simple_invoice(self, date)
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
+        # Ensure linked move is posted
+        move = invoice.move_id
+        move.button_validate()
+        self.assertEqual(move.state, 'posted',
+                         'Journal Entries are not in posted state')
         payment_order_create_obj = self.env['payment.order.create']
         account_payment_id = self.ref('account_payment.payment_order_1')
         payment_order_create = payment_order_create_obj.create(
-            {'duedate': date,
+            {'cash_discount_date_start': date,
+             'cash_discount_date_end': date,
              'cash_discount_date': True,
              'populate_results': True})
         ctx = self.context.copy()

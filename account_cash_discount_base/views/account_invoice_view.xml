@@ -16,6 +16,7 @@
                             <button name="button_reset_taxes" states="draft,proforma2" string="(update)" class="oe_link oe_edit_only" type="object" help="Recompute taxes and total"/>
                         </div>
                         <field name="discount_amount" attrs="{'readonly': ['|', ('discount_percent', '!=', 0.0), ('state', '!=', 'draft')]}"/>
+                        <field name="discount" />
                     </group>
                     <group name="payments" string="Payments"></group>
                 </xpath>
