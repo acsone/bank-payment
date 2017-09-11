@@ -21,3 +21,4 @@
 ##############################################################################
 
 from . import payment_order_create
+from . import validate_invoice_cancel

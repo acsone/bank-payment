@@ -2,7 +2,7 @@
 #
 ##############################################################################
 #
-#     Authors: Adrien Peiffer
+#    Authors: Adrien Peiffer
 #    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,24 +19,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+#
 
-{
-    "name": "Account Payment Draft Move",
-    "version": "1.0",
-    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
-    "website": "http://www.acsone.eu",
-    "images": [],
-    "category": "Accounting",
-    "depends": ["account_banking_payment_export",
-                "account_default_draft_move",
-                ],
-    "data": [
-        'views/account_invoice_view.xml',
-        'wizard/validate_invoice_cancel_view.xml',
-        ],
-    "demo": [],
-    "test": [],
-    "licence": "AGPL-3",
-    "installable": True,
-    "active": False,
-}
+from . import test_cancel_invoice
