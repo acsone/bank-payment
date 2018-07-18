@@ -167,6 +167,11 @@ class AccountPaymentOrder(models.Model):
                 end2end_identification.text = self._prepare_field(
                     'End to End Identification', 'line.name',
                     {'line': line}, 35, gen_args=gen_args)
+                instruction_identification = etree.SubElement(
+                    payment_identification, 'InstrId')
+                instruction_identification.text = self._prepare_field(
+                    'Instruction Identification', 'line.name',
+                    {'line': line}, 35, gen_args=gen_args)
                 currency_name = self._prepare_field(
                     'Currency Code', 'line.currency_id.name',
                     {'line': line}, 3, gen_args=gen_args)

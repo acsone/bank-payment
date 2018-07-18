@@ -266,6 +266,7 @@
             <xs:element maxOccurs="1" minOccurs="0" name="Tax" type="TaxInformation3"/>
             <xs:element maxOccurs="10" minOccurs="0" name="RltdRmtInf" type="RemittanceLocation2"/>
             <xs:element maxOccurs="1" minOccurs="0" name="RmtInf" type="RemittanceInformation5"/>
+            <xs:element maxOccurs="1" minOccurs="0" name="Purp" type="Purpose2Choice"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="CreditorReferenceInformation2">
