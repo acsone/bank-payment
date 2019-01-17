@@ -280,7 +280,8 @@ class AccountPaymentOrder(models.Model):
                             payline.ml_maturity_date,
                             requested_date))
                 # Write requested_date on 'date' field of payment line
-                payline.date = requested_date
+                with self.env.norecompute():
+                    payline.date = requested_date
                 # Group options
                 if order.payment_mode_id.group_lines:
                     hashcode = payline.payment_line_hashcode()
@@ -296,6 +297,7 @@ class AccountPaymentOrder(models.Model):
                         'paylines': payline,
                         'total': payline.amount_currency,
                     }
+            order.recompute()
             # Create bank payment lines
             for paydict in list(group_paylines.values()):
                 # Block if a bank payment line is <= 0
