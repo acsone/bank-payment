@@ -78,8 +78,7 @@ class AccountInvoice(models.Model):
             applicable_lines = inv.move_id.line_ids.filtered(
                 lambda x: (
                     not x.reconciled and x.payment_mode_id.payment_order_ok and
-                    x.account_id.internal_type in ('receivable', 'payable') and
-                    not x.payment_line_ids
+                    x.account_id.internal_type in ('receivable', 'payable')
                 )
             )
             if not applicable_lines:
