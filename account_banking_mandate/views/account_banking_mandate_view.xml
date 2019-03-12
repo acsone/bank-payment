@@ -23,6 +23,19 @@
                 <field name="state" widget="statusbar"/>
             </header>
             <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button name="show_specific_view" position="after">
+                <button name="show_payment_lines"
+                        help="Payment lines"
+                        class="oe_stat_button"
+                        icon="fa-list"
+                        type="object">
+                    <field name="payment_line_ids_count"
+                           widget="statinfo"
+                           string="Payment lines"/>
+                </button>
+            </button>
+                </div>
                 <div class="oe_title">
                     <h1>
                         <field name="unique_mandate_reference"
@@ -43,9 +56,6 @@
                     <field name="signature_date"/>
                     <field name="scan"/>
                     <field name="last_debit_date"/>
-                </group>
-                <group name="payment_lines" string="Related Payment Lines">
-                    <field name="payment_line_ids" nolabel="1"/>
                 </group>
             </sheet>
             <div class="oe_chatter">
