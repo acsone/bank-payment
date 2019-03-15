@@ -64,11 +64,31 @@ class AccountBankingMandate(models.Model):
     payment_line_ids = fields.One2many(
         comodel_name='account.payment.line', inverse_name='mandate_id',
         string="Related Payment Lines")
+    payment_line_ids_count = fields.Integer(
+        compute='_compute_payment_line_ids_count',
+    )
 
     _sql_constraints = [(
         'mandate_ref_company_uniq',
         'unique(unique_mandate_reference, company_id)',
         'A Mandate with the same reference already exists for this company!')]
+
+    @api.multi
+    @api.depends('payment_line_ids')
+    def _compute_payment_line_ids_count(self):
+        for rec in self:
+            rec.payment_line_ids_count = len(rec.payment_line_ids)
+
+    @api.multi
+    def show_payment_lines(self):
+        self.ensure_one()
+        return {
+            'name': _("Payment lines"),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'account.payment.line',
+            'domain': [('mandate_id', '=', self.id)],
+        }
 
     @api.multi
     @api.constrains('signature_date', 'last_debit_date')
