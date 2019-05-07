@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 
 class ResPartnerBank(models.Model):
@@ -25,3 +25,16 @@ class ResPartnerBank(models.Model):
                     _("You cannot change the company of Partner Bank %s, "
                       "as there exists mandates referencing it that "
                       "belong to another company.") % (rpb.display_name,))
+
+    @api.multi
+    def unlink(self):
+        mandate_model = self.env['account.banking.mandate']
+        valid_mandate = mandate_model.sudo().search([
+            ('partner_bank_id', 'in', self.ids),
+            ('state', '=', 'valid')], limit=1)
+        if valid_mandate:
+            raise UserError(_(
+                "It is not possible to delete a bank account linked to a "
+                "valid mandate. Please cancel the mandate or wait for its "
+                "expiration before deleting the bank account."))
+        return super(ResPartnerBank, self).unlink()
