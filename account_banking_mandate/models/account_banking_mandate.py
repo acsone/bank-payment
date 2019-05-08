@@ -183,7 +183,7 @@ class AccountBankingMandate(models.Model):
 
     @api.model
     def create(self, vals=None):
-        if vals.get('unique_mandate_reference', 'New') == 'New':
+        if not vals.get('unique_mandate_reference'):
             vals['unique_mandate_reference'] = \
                 self.env['ir.sequence'].next_by_code(
                     'account.banking.mandate') or 'New'
