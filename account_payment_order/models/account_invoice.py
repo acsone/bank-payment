@@ -58,6 +58,9 @@ class AccountInvoice(models.Model):
             payment_mode = self.env['account.payment.mode']
         vals = {
             'payment_mode_id': payment_mode.id or self.payment_mode_id.id,
+            'batch_booking': payment_mode.default_batch_booking
+            if payment_mode
+            else self.payment_mode_id.default_batch_booking,
         }
         # other important fields are set by the inherit of create
         # in account_payment_order.py
