@@ -32,6 +32,7 @@
                     string="Accounting Entries Options"
                     attrs="{'invisible': [('payment_order_ok', '=', False)]}">
                 <field name="generate_move"/>
+                <field name="default_batch_booking"/>
                 <field name="offsetting_account" widget="radio"
                     attrs="{'required': [('generate_move', '=', True)], 'invisible': [('generate_move', '=', False)]}"/>
                 <field name="transfer_account_id"

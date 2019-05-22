@@ -82,6 +82,10 @@ class AccountPaymentMode(models.Model):
         ('line', 'One move per payment line'),
         ], string='Move Option', default='date')
     post_move = fields.Boolean(string='Post Move', default=True)
+    default_batch_booking = fields.Boolean(
+        string='Default Batch Booking',
+        help="Default value for payment order batch booking related "
+             "to this payment mode")
 
     @api.multi
     @api.constrains(
