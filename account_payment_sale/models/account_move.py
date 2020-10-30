@@ -8,12 +8,12 @@ class AccountMove(models.Model):
 
     @api.model
     def create(self, vals_list):
-        if vals_list.get("payment_mode_id"):
-            payment_mode = self.env["account.payment.mode"].browse(
-                vals_list["payment_mode_id"]
-            )
-            if payment_mode.bank_account_link == "fixed":
-                vals_list[
-                    "invoice_partner_bank_id"
-                ] = payment_mode.fixed_journal_id.bank_account_id.id
+        if vals_list.get("payment_mode_id") and vals_list.get("type") in ("out_invoice", "out_refund"):
+                payment_mode = self.env["account.payment.mode"].browse(
+                    vals_list["payment_mode_id"]
+                )
+                if payment_mode.bank_account_link == "fixed":
+                    vals_list[
+                        "invoice_partner_bank_id"
+                    ] = payment_mode.fixed_journal_id.bank_account_id.id
         return super().create(vals_list)
