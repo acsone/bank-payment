@@ -15,5 +15,6 @@
     ],
     "data": [
         "views/payment_transaction.xml",
-    ]
+    ],
+    "post_init_hook": "post_init_hook",
 }
