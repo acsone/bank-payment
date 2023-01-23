@@ -63,6 +63,7 @@ class AccountPaymentOrder(models.Model):
         # Some countries use IBAN but are not part of the SEPA zone
         # example: Turkey, Madagascar, Tunisia, etc.
         return [
+            "AT",
             "BE",
             "BG",
             "ES",
