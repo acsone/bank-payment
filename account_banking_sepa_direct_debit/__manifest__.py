@@ -12,11 +12,6 @@
     "website": "https://github.com/OCA/bank-payment",
     "category": "Banking addons",
     "depends": ["account_banking_pain_base", "account_banking_mandate"],
-    "external_dependencies": {
-        "python": [
-            "stdnum",
-        ],
-    },
     "assets": {
         "web.assets_backend": [
             "/account_banking_sepa_direct_debit/static/src/css/report.css"
