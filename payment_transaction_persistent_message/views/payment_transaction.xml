@@ -12,7 +12,11 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state_message']/parent::group" position="after">
                 <group string="Persistent Message">
-                    <field name="persistent_state_message" nolabel="1" />
+                    <field
+                        name="persistent_state_message"
+                        style="word-break: break-word;"
+                        nolabel="1"
+                    />
                 </group>
             </xpath>
         </field>
