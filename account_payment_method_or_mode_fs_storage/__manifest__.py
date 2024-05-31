@@ -2,9 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Account Payment Method Fs Storage",
+    "name": "Account Payment Method Or Mode Fs Storage",
     "summary": """
-        Add the possibility to specify on the payment method,
+        Add the possibility to specify on the payment method or on the
+        payment mode depending on the company,
         a storage where files generated will be pushed to upon payment
     """,
     "version": "16.0.1.0.2",
@@ -14,8 +15,11 @@
     "depends": [
         "account_banking_sepa_credit_transfer",
         "fs_storage",
+        "account_payment_mode",
     ],
     "data": [
+        "views/res_config_settings.xml",
+        "views/account_payment_mode.xml",
         "views/fs_storage.xml",
         "views/account_payment_method.xml",
     ],

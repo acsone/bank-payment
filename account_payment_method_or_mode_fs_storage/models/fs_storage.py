@@ -12,6 +12,9 @@ class FsStorage(models.Model):
     use_on_payment_method = fields.Boolean(
         help="Tells if storage can be set on payment methods",
     )
+    use_on_payment_mode = fields.Boolean(
+        help="Tells if storage can be set on payment modes",
+    )
 
     @api.constrains("use_on_payment_method")
     def _check_use_on_payment_method(self):
@@ -26,3 +29,17 @@ class FsStorage(models.Model):
 
         if any(mapped_data.get(str(rec.id), 0) > 0 for rec in storage_not_on_payment):
             raise UserError(_("Storage is already used on at least one payment method"))
+
+    @api.constrains("use_on_payment_mode")
+    def _check_use_on_payment_mode(self):
+        storage_not_on_payment = self.filtered(lambda r: not r.use_on_payment_mode)
+        storage_not_on_payment_str_ids = [str(r.id) for r in storage_not_on_payment]
+        data = self.env["account.payment.mode"].read_group(
+            domain=[("storage", "in", storage_not_on_payment_str_ids)],
+            fields=["storage"],
+            groupby=["storage"],
+        )
+        mapped_data = {r["storage"]: r["storage_count"] for r in data}
+
+        if any(mapped_data.get(str(rec.id), 0) > 0 for rec in storage_not_on_payment):
+            raise UserError(_("Storage is already used on at least one payment mode"))

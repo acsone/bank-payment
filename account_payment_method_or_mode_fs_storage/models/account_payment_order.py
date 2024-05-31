@@ -12,12 +12,17 @@ class AccountPaymentOrder(models.Model):
 
     _inherit = "account.payment.order"
 
+    def _get_storage(self):
+        if self.env.company.fs_storage_source_payment == "mode":
+            return self.payment_mode_id.storage
+        return self.payment_method_id.storage
+
     def _must_be_exported_to_storage(self):
         self.ensure_one()
-        return bool(self.payment_method_id.storage)
+        return bool(self._get_storage())
 
     def _export_to_storage(self, file_content, filename):
-        storage_id = int(self.payment_method_id.storage)
+        storage_id = int(self._get_storage())
         # user that confirms order may not have access to storage
         export_storage = self.env["fs.storage"].sudo().search([("id", "=", storage_id)])
         try:

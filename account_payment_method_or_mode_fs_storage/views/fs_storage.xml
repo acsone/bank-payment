@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <field name="options" position="after">
                 <field name="use_on_payment_method" />
+                <field name="use_on_payment_mode" />
             </field>
         </field>
     </record>
