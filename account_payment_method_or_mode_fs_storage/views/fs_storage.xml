@@ -8,7 +8,6 @@
         <field name="inherit_id" ref="fs_storage.fs_storage_form_view" />
         <field name="arch" type="xml">
             <field name="options" position="after">
-                <field name="use_on_payment_method" />
             </field>
         </field>
     </record>

@@ -6,7 +6,7 @@
     <record model="ir.ui.view" id="account_payment_method_form_view">
         <field
             name="name"
-        >account.payment.method.form (in account_payment_method_fs_storage)</field>
+        >account.payment.method.form (in account_payment_method_or_mode_fs_storage)</field>
         <field name="model">account.payment.method</field>
         <field
             name="inherit_id"
