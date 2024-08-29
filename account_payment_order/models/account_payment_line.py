@@ -183,6 +183,8 @@ class AccountPaymentLine(models.Model):
         if not self.communication:
             raise UserError(_("Communication is empty on payment line %s.") % self.name)
 
+        self.move_line_id._check_bank_allows_out_payments()
+
     def _prepare_account_payment_vals(self):
         """Prepare the dictionary to create an account payment record from a set of
         payment lines.
