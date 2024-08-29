@@ -5,7 +5,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.fields import first
 
 
 class AccountMove(models.Model):
@@ -157,18 +156,7 @@ class AccountMove(models.Model):
             for line in applicable_lines.filtered(
                 lambda l: l.account_id.account_type == "liability_payable"
             ):
-                bank = line.partner_bank_id or first(line.partner_id.bank_ids)
-                if bank and not bank.allow_out_payment:
-                    raise UserError(
-                        _(
-                            'The option "Send Money" is not enabled on the bank '
-                            "account %(bank_account)s of partner %(partner)s."
-                        )
-                        % {
-                            "bank_account": bank.bank_name,
-                            "partner": line.partner_id.name,
-                        }
-                    )
+                line._check_bank_allows_out_payments()
 
             for payment_mode in payment_modes:
                 payorder = apoo.search(
