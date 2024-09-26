@@ -2,7 +2,8 @@
 # © 2014 Serv. Tecnol. Avanzados - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.fields import first
 
 
@@ -71,10 +72,22 @@ class AccountMoveLine(models.Model):
             # in this case
         if payment_order.payment_type == "outbound":
             amount_currency *= -1
-        partner_bank_id = self.partner_bank_id.id or first(self.partner_id.bank_ids).id
+        partner_bank_id = self.partner_bank_id or first(self.partner_id.bank_ids)
+        if partner_bank_id and not partner_bank_id.allow_out_payment:
+            raise UserError(
+                _(
+                    'The option "Send Money" is not enabled on the bank '
+                    "account %(bank_account)s of partner %(partner)s."
+                )
+                % {
+                    "bank_account": partner_bank_id.acc_number,
+                    "partner": self.partner_id.name,
+                }
+            )
+
         vals = {
             "order_id": payment_order.id,
-            "partner_bank_id": partner_bank_id,
+            "partner_bank_id": partner_bank_id.id,
             "partner_id": self.partner_id.id,
             "move_line_id": self.id,
             "communication": communication,
