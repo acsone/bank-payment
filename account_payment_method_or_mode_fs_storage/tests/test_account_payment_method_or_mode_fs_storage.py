@@ -103,6 +103,8 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
         order.draft2open()
         with self.with_custom_method():
             action = order.open2generated()
+            # commit need to be performed in order to perform the 'postcommit'
+            self.env.cr.commit()  # pylint: disable=E8102
 
         self.assertDictEqual(
             action,
@@ -125,6 +127,15 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
             [("res_model", "=", "account.payment.order"), ("res_id", "=", order.id)]
         )
         self.assertEqual(len(attachment), 1)
+
+        # clean up
+        order.action_cancel()
+        order.unlink()
+
+        self.env.cr.commit()  # pylint: disable=E8102
+        # because we committed the cursor, the savepoint of the test method is
+        # gone, and this would break TransactionCase cleanups
+        self.cr.execute("SAVEPOINT test_%d" % self._savepoint_id)
 
     def test_check_use_on_payment_method(self):
         self.env.user.company_id = self.company.id
@@ -185,6 +196,8 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
         order.draft2open()
         with self.with_custom_method():
             action = order.open2generated()
+            # commit need to be performed in order to perform the 'postcommit'
+            self.env.cr.commit()  # pylint: disable=E8102
 
         self.assertDictEqual(
             action,
@@ -207,6 +220,15 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
             [("res_model", "=", "account.payment.order"), ("res_id", "=", order.id)]
         )
         self.assertEqual(len(attachment), 1)
+
+        # clean up
+        order.action_cancel()
+        order.unlink()
+
+        self.env.cr.commit()  # pylint: disable=E8102
+        # because we committed the cursor, the savepoint of the test method is
+        # gone, and this would break TransactionCase cleanups
+        self.cr.execute("SAVEPOINT test_%d" % self._savepoint_id)
 
     def test_payment_mode_fs_storage(self):
         self.env.user.company_id = self.company.id
@@ -243,6 +265,8 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
         order.draft2open()
         with self.with_custom_method():
             action = order.open2generated()
+            # commit need to be performed in order to perform the 'postcommit'
+            self.env.cr.commit()  # pylint: disable=E8102
 
         self.assertDictEqual(
             action,
@@ -265,6 +289,15 @@ class TestAccountPaymentMethodOrModeFsStorage(AccountTestInvoicingCommon):
             [("res_model", "=", "account.payment.order"), ("res_id", "=", order.id)]
         )
         self.assertEqual(len(attachment), 1)
+
+        # clean up
+        order.action_cancel()
+        order.unlink()
+
+        self.env.cr.commit()  # pylint: disable=E8102
+        # because we committed the cursor, the savepoint of the test method is
+        # gone, and this would break TransactionCase cleanups
+        self.cr.execute("SAVEPOINT test_%d" % self._savepoint_id)
 
     def test_check_use_on_payment_mode(self):
         self.env.user.company_id = self.company.id
