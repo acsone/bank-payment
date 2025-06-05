@@ -50,7 +50,7 @@ class TestSCT(TransactionCase):
         cls.account_expense = cls.account_model.create(
             {
                 "account_type": "expense",
-                "company_id": cls.main_company.id,
+                "company_ids": [(6, 0, [cls.main_company.id])],
                 "name": "Test expense",
                 "code": "TE.1",
             }
@@ -58,7 +58,7 @@ class TestSCT(TransactionCase):
         cls.account_payable = cls.account_model.create(
             {
                 "account_type": "liability_payable",
-                "company_id": cls.main_company.id,
+                "company_ids": [(6, 0, [cls.main_company.id])],
                 "name": "Test payable",
                 "code": "TP.1",
             }
