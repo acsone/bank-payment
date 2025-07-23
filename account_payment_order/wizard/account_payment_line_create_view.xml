@@ -12,6 +12,7 @@
             <form>
                 <group name="main">
                     <field name="date_type" />
+                    <field name="due_on"/>
                     <field
                         name="move_date"
                         required="date_type == 'move'"

@@ -32,6 +32,14 @@ class AccountPaymentLineCreate(models.TransientModel):
         string="Type of Date Filter",
         required=True,
     )
+    due_on = fields.Selection(
+        string="Due on",
+        selection=[
+            ('<=', 'Before or equal'),
+            ('=', 'Equal')],
+        default='<=',
+        required=True,
+    )
     due_date = fields.Date()
     move_date = fields.Date(default=fields.Date.context_today)
     payment_mode = fields.Selection(
@@ -93,11 +101,11 @@ class AccountPaymentLineCreate(models.TransientModel):
         if self.date_type == "due":
             domain += [
                 "|",
-                ("date_maturity", "<=", fields.Date.to_string(self.due_date)),
+                ("date_maturity", self.due_on, fields.Date.to_string(self.due_date)),
                 ("date_maturity", "=", False),
             ]
         elif self.date_type == "move":
-            domain.append(("date", "<=", fields.Date.to_string(self.move_date)))
+            domain.append(("date", self.due_on, fields.Date.to_string(self.move_date)))
         if self.invoice:
             domain.append(
                 (
