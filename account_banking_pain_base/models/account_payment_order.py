@@ -50,6 +50,9 @@ class AccountPaymentOrder(models.Model):
         "debtor.",
     )
     batch_booking = fields.Boolean(
+        compute="_compute_batch_booking",
+        readonly=False,
+        store=True,
         tracking=True,
         help="If true, the bank statement will display only one debit "
         "line for all the wire transfers of the SEPA XML file ; if "
@@ -706,3 +709,20 @@ class AccountPaymentOrder(models.Model):
         csi_scheme_name_proprietary = etree.SubElement(csi_scheme_name, "Prtry")
         csi_scheme_name_proprietary.text = scheme_name_proprietary
         return True
+
+    @api.depends("payment_mode_id")
+    def _compute_batch_booking(self):
+        self.batch_booking = False
+        if self.payment_mode_id:
+            self.batch_booking = self.payment_mode_id.default_batch_booking
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        payment_mode_model = self.env["account.payment.mode"]
+        for vals in vals_list:
+            if "batch_booking" not in vals:
+                payment_mode_id = vals.get("payment_mode_id", None)
+                if payment_mode_id:
+                    payment_mode = payment_mode_model.browse(payment_mode_id)
+                    vals["batch_booking"] = payment_mode.default_batch_booking
+        return super().create(vals_list)
