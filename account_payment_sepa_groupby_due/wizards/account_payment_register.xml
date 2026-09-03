@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="account_payment_register_view_form" model="ir.ui.view">
+        <field name="name">account.payment.register.form.groupby.due</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="arch" type="xml">
+            <field name="group_payment" position="attributes">
+                <attribute name="string">Group Payments by Partner</attribute>
+            </field>
+            <field name="group_payment" position="after">
+                <field name="payment_method_code" invisible="1" />
+                <field
+                    name="group_by_due_date"
+                    invisible="payment_method_code != 'sepa_ct'"
+                />
+            </field>
+            <field name="payment_date" position="attributes">
+                <attribute name="invisible">group_by_due_date</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

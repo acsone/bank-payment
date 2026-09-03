@@ -1,16 +1,14 @@
-[ This file is optional but strongly suggested to allow end-users to evaluate the
-module's usefulness in their context. ]
+BUSINESS NEED:
 
-BUSINESS NEED: 
-It should explain the “why” of the module: 
-- what is the business requirement that generated the need to develop this module
-- in which context or use cases this module can be useful (practical examples are welcome!). 
+Companies paying vendor bills through SEPA credit transfers often want each
+transfer to be executed by the bank on the invoice due date, rather than all on
+the same payment date. When registering a payment for many invoices at once,
+the standard wizard uses a single payment date for the whole batch.
 
 APPROACH:
-It could also explain the approach to address the mentioned need.
 
-USEFUL INFORMATION:
-It can also inform on related modules:
-- modules it depends on and their features
-- other modules that can work well together with this one
-- suggested setups where the module is useful (eg: multicompany, multi-website)
+This module adds a *Group Payments by Due Date* option to the standard
+*Register Payment* wizard. Lines are additionally grouped by their invoice due
+date, and each resulting payment is dated on that due date. It reuses Odoo's
+existing batching mechanism, so it composes naturally with the standard
+*Group Payments by Partner* option.
