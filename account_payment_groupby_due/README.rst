@@ -1,6 +1,6 @@
-================================
-Account Payment Sepa Groupby Due
-================================
+===========================
+Account Payment Groupby Due
+===========================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -17,10 +17,10 @@ Account Payment Sepa Groupby Due
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fbank--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/bank-payment/tree/18.0/account_payment_sepa_groupby_due
+    :target: https://github.com/OCA/bank-payment/tree/18.0/account_payment_groupby_due
     :alt: OCA/bank-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/bank-payment-18-0/bank-payment-18-0-account_payment_sepa_groupby_due
+    :target: https://translation.odoo-community.org/projects/bank-payment-18-0/bank-payment-18-0-account_payment_groupby_due
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
     :target: https://runboat.odoo-community.org/builds?repo=OCA/bank-payment&target_branch=18.0
@@ -29,13 +29,13 @@ Account Payment Sepa Groupby Due
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module extends the *Register Payment* wizard
-(``account.payment.register``) so that SEPA payments can be grouped by
+(``account.payment.register``) so that payments can be grouped by
 invoice due date.
 
-When paying several invoices with a SEPA payment method, a new option
-*Group Payments by Due Date* creates one payment per due date and sets
-each payment's date to that due date, so the transfers are executed by
-the bank on the day each invoice is actually due.
+When paying several invoices at once, a new option *Group Payments by
+Due Date* creates one payment per due date and sets each payment's date
+to that due date, so each payment is dated on the day its invoices are
+actually due.
 
 The option works together with the standard *Group Payments by Partner*
 option: when both are enabled, payments are grouped by partner **and**
@@ -51,11 +51,10 @@ Use Cases / Context
 
 BUSINESS NEED:
 
-Companies paying vendor bills through SEPA credit transfers often want
-each transfer to be executed by the bank on the invoice due date, rather
-than all on the same payment date. When registering a payment for many
-invoices at once, the standard wizard uses a single payment date for the
-whole batch.
+Companies paying many invoices at once often want each payment to be
+executed on the invoice due date, rather than all on the same payment
+date. When registering a payment for several invoices, the standard
+wizard uses a single payment date for the whole batch.
 
 APPROACH:
 
@@ -88,7 +87,6 @@ Usage
 To use this module, you need to:
 
 - Select the invoices you want to pay and open *Register Payment*.
-- Choose a SEPA payment method (e.g. *SEPA Credit Transfer*).
 - Enable *Group Payments by Due Date*. The *Payment Date* field is
   hidden, as each payment date is taken from the invoice due date.
 - Optionally also enable *Group Payments by Partner* to group by both
@@ -96,13 +94,16 @@ To use this module, you need to:
 - Click *Create Payments*: one payment is created per due date (and per
   partner when grouping by partner), each dated on its invoice due date.
 
+The option is only shown when the selected invoices can actually be
+grouped (i.e. when there is more than one payment to create).
+
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/bank-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/bank-payment/issues/new?body=module:%20account_payment_sepa_groupby_due%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/bank-payment/issues/new?body=module:%20account_payment_groupby_due%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -132,6 +133,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/bank-payment <https://github.com/OCA/bank-payment/tree/18.0/account_payment_sepa_groupby_due>`_ project on GitHub.
+This module is part of the `OCA/bank-payment <https://github.com/OCA/bank-payment/tree/18.0/account_payment_groupby_due>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

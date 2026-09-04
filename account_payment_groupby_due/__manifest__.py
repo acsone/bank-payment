@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Account Payment Sepa Groupby Due",
-    "summary": """Group SEPA payment orders by due date""",
+    "name": "Account Payment Groupby Due",
+    "summary": """Group payment registration by invoice due date""",
     "category": "Banking",
     "version": "18.0.1.0.0",
     "license": "AGPL-3",

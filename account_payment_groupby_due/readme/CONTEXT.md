@@ -1,9 +1,9 @@
 BUSINESS NEED:
 
-Companies paying vendor bills through SEPA credit transfers often want each
-transfer to be executed by the bank on the invoice due date, rather than all on
-the same payment date. When registering a payment for many invoices at once,
-the standard wizard uses a single payment date for the whole batch.
+Companies paying many invoices at once often want each payment to be executed on
+the invoice due date, rather than all on the same payment date. When registering
+a payment for several invoices, the standard wizard uses a single payment date
+for the whole batch.
 
 APPROACH:
 

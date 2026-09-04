@@ -8,9 +8,9 @@ class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
     group_by_due_date = fields.Boolean(
-        help="Group the SEPA payments by invoice due date and set each payment's "
-        "date to that due date. Combined with 'Group Payments by Partner', "
-        "payments are grouped by both partner and due date.",
+        help="Group the payments by invoice due date and set each payment's date "
+        "to that due date. Combined with 'Group Payments by Partner', payments "
+        "are grouped by both partner and due date.",
     )
 
     @api.depends("group_by_due_date")
