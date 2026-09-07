@@ -88,6 +88,48 @@ class TestGroupByDueDate(AccountTestInvoicingCommon):
             },
         )
 
+    def test_enabling_flag_leaves_wizard_untouched(self):
+        # Enabling the option must not change any standard wizard behaviour
+        # (the split happens only at payment creation): 'can_edit_wizard' and
+        # 'can_group_payments' stay exactly as they were.
+        bill_1 = self._create_bill(self.partner_a, "2017-02-01", 1000.0)
+        bill_2 = self._create_bill(self.partner_a, "2017-03-01", 2000.0)
+
+        wizard = self._register(bill_1 + bill_2)
+        can_edit_wizard = wizard.can_edit_wizard
+        can_group_payments = wizard.can_group_payments
+
+        wizard.group_by_due_date = True
+
+        self.assertEqual(wizard.can_edit_wizard, can_edit_wizard)
+        self.assertEqual(wizard.can_group_payments, can_group_payments)
+
+        payments = wizard._create_payments()
+        self.assertEqual(len(payments), 2)
+        self.assertEqual(
+            {(p.date, p.amount) for p in payments},
+            {(bill_1.invoice_date_due, 1000.0), (bill_2.invoice_date_due, 2000.0)},
+        )
+
+    def test_both_flags_toggleable_together(self):
+        # Enabling 'group_by_due_date' must not hide 'group_payment': the two
+        # options combine (partner AND due date). Ticked after the wizard opens,
+        # both must stay effective.
+        bill_a1 = self._create_bill(self.partner_a, "2017-02-01", 1000.0)
+        bill_a2 = self._create_bill(self.partner_a, "2017-02-01", 500.0)
+        bill_a3 = self._create_bill(self.partner_a, "2017-03-01", 2000.0)
+
+        wizard = self._register(bill_a1 + bill_a2 + bill_a3)
+        wizard.group_by_due_date = True
+        wizard.group_payment = True
+
+        payments = wizard._create_payments()
+        self.assertEqual(len(payments), 2)
+        self.assertEqual(
+            {(p.date, p.amount) for p in payments},
+            {(bill_a1.invoice_date_due, 1500.0), (bill_a3.invoice_date_due, 2000.0)},
+        )
+
     def test_without_group_by_due_date_uses_payment_date(self):
         bill_1 = self._create_bill(self.partner_a, "2017-02-01", 1000.0)
         bill_2 = self._create_bill(self.partner_a, "2017-03-01", 2000.0)
