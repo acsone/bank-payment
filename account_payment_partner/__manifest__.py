@@ -24,7 +24,6 @@
         "views/report_invoice.xml",
         "reports/account_invoice_report_view.xml",
     ],
-    "demo": ["demo/partner_demo.xml"],
     "installable": True,
     "pre_init_hook": "pre_init_hook",
 }
